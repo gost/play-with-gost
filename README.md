@@ -12,9 +12,5 @@ Requirements:
 
 ## Docker
 
-- Step 1: Run NginxProxy
-
-```
-$ docker run -d -p 80:80 --name nginx-proxy -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
-```
+See <a href="./docker/startup.md">docker startup</a>
 
