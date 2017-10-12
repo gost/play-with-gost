@@ -7,7 +7,7 @@ In this example we're starting 2 projects on a local machine:
 
 2. gost-test on port 8081, external uri: http://gost_test.lvh.me
 
-The site lvh.me is a handy tool to test the subdomains: it redirects to localhost machine.
+The site lvh.me is a handy site to test the subdomains: it redirects to localhost machine.
 
 Steps:
 
@@ -65,7 +65,7 @@ $ docker-compose -p gost_test down
 
 ## Dashboard changes
 
-The docker-compose file uses a minor modified dashboard (bertt/gost-dashboard). 
+The docker-compose file uses a slightly modified dashboard (bertt/gost-dashboard). 
 
 Changes: 
 
