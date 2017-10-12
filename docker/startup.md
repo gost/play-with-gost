@@ -34,7 +34,7 @@ $ export PORT=8080
 $ export VIRTUAL_HOST=gost_prod.lvh.me
 ```
 
-- Run docker-compose for project 'gost-prod'
+- Run docker-compose for project 'gost_prod'
 
 ```
 $ docker-compose -p gost_prod up -d
