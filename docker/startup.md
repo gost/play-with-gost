@@ -3,9 +3,9 @@
 This document describes the commands used to start multiple GOST projects. 
 In this example we're starting 2 projects on a local machine: 
 
-1. gost-prod on port 8080, external uri: http://gost_prod.lvh.me
+1. gost_prod on port 8080, external uri: http://gost_prod.lvh.me
 
-2. gost-test on port 8081, external uri: http://gost_test.lvh.me
+2. gost_test on port 8081, external uri: http://gost_test.lvh.me
 
 The site lvh.me is a handy site to test the subdomains: it redirects to localhost machine.
 
