@@ -54,6 +54,13 @@ $ docker-compose -p gost_test up -d
 
 and this project should be visible on http://gost_test.lvh.me
 
+To shut down the projects do:
+
+```
+$ docker-compose -p gost_prod down
+$ docker-compose -p gost_test down
+```
+
 ## Dashboard changes
 
 The docker-compose file uses a minor modified dashboard (bertt/gost-dashboard). 
