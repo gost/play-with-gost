@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  pwg.web:
+    image: pwg.web
+    build:
+      context: ./pwg.web
+      dockerfile: Dockerfile

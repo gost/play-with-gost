@@ -1,7 +1,5 @@
-﻿using Ductus.FluentDocker.Services;
-using System;
-using System.Linq;
-using Ductus.FluentDocker.Commands;
+﻿using System;
+using pwg.core;
 
 namespace pwg.console
 {
@@ -9,17 +7,14 @@ namespace pwg.console
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-            Environment.SetEnvironmentVariable("PORT", "8080");
-            Environment.SetEnvironmentVariable("VIRTUAL_HOST", "gost_prod.lvh.me");
-
-            var file = "docker-compose.yml";
-            var hosts = new Hosts().Discover();
-            var _docker = hosts.FirstOrDefault(x => x.IsNative) ?? hosts.FirstOrDefault(x => x.Name == "default");
-            var containers = _docker.Host.ComposeUp(composeFile: file, altProjectName: "gost_prod");
-
-            Console.WriteLine("Docker-compose fired: " + containers.Success);
+            Console.WriteLine("Starting GOST");
+            var g = new Gost();
+            g.Start("gost_prod", "gost_prod.lvh.me", 8080);
+            // to stop do the following:
+            // g.Stop("gost_prod");
+            Console.WriteLine("Stopped.. press a key");
             Console.ReadKey();
+
         }
     }
 }

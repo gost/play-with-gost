@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ductus.FluentDocker" Version="2.2.3" />
+    <ProjectReference Include="..\pwg.core\pwg.core.csproj" />
   </ItemGroup>
 
   <ItemGroup>
