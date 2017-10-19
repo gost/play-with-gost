@@ -60,6 +60,8 @@ Application started. Press Ctrl+C to shut down.
 
 Now open http://localhost:50118/index.html
 
+<img src="pwg.png"/>
+
 Step 5: Create new GOST project
 
 - Enter a name for new GOST project (for example: test)
