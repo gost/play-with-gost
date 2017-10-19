@@ -11,17 +11,16 @@ namespace pwg.web.Controllers
         [HttpGet]
         public List<string> Get()
         {
-            return null;
-            // todo: get a list of gost instances
+            var g = new GostRepository();
+            return g.GetProjects();
         }
 
         [HttpPost]
-        public void Post(string Name, string Tld)
+        public void Post([FromBody]PostObject postObject)
         {
             var g = new GostRepository();
-            g.Start(Name, Tld);
+            g.Start(postObject.Name, postObject.Tld);
         }
-
 
         [HttpDelete]
         public void Delete(string name)
@@ -29,5 +28,11 @@ namespace pwg.web.Controllers
             var g = new GostRepository();
             g.Stop(name);
         }
+    }
+
+    public class PostObject
+    {
+        public string Name { get; set; }
+        public string Tld { get; set; }
     }
 }

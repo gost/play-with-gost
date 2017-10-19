@@ -12,7 +12,9 @@ namespace pwg.console
             var projectname = "haha";
             var tld = "lvh.me";
             // StartGostInstance(g, projectname, tld);
-            StopGostInstance(g, projectname);
+            // StopGostInstance(g, projectname);
+            var projects = g.GetProjects();
+            Console.WriteLine("Projects: " + string.Join(",", projects));
             Console.WriteLine("Stopped.. press a key");
             Console.ReadKey();
 

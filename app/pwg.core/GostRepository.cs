@@ -32,11 +32,18 @@ namespace pwg.core
         public List<String> GetProjects()
         {
             var runningContainers = _docker.GetRunningContainers();
-            var firstcontainer = runningContainers[0];
-            var configfirst = runningContainers[0].GetConfiguration();
+            var result = new List<String>();
 
-            //runningContainers[0].Name
-            return null;
+            foreach(var cnt in runningContainers)
+            {
+                if (cnt.Name.Contains("_dashboard_")){
+                    int start = 1;
+                    int end = cnt.Name.IndexOf("_dashboard_");
+                    var project = cnt.Name.Substring(start, end - start);
+                    result.Add(project);
+                }
+            }
+            return result;
         }
 
         public void Stop(string ProjectName)
