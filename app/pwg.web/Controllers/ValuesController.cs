@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using pwg.core;
 
 namespace pwg.web.Controllers
@@ -8,13 +7,12 @@ namespace pwg.web.Controllers
     public class ValuesController : Controller
     {
         // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
+        [HttpPost]
+        public bool Get(string ProjectName)
         {
             var g = new Gost();
-            g.Start("gost_prod", "gost_prod.lvh.me", 8080);
-            // but no containers are started, why???
-            return new string[] { "value1", "value2" };
+            g.Start(ProjectName, "gost_prod.lvh.me", 8080);
+            return true;
         }
     }
 }

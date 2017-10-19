@@ -17,13 +17,15 @@ namespace pwg.core
 
         public void Start(string ProjectName, string ExternalUri, int Port)
         {
-
             Environment.SetEnvironmentVariable("PORT", Port.ToString());
             Environment.SetEnvironmentVariable("VIRTUAL_HOST", ExternalUri);
 
             var file = "docker-compose.yml";
             var services = new string[1]{ "-d"};
-            var containers = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName,services:services);
+            var ver = _docker.Host.ComposeVersion().Data[0];
+
+            _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName,services:services);
+
         }
 
         public void Stop(string ProjectName)
