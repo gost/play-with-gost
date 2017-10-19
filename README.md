@@ -13,7 +13,18 @@ Requirements:
 ## Test instructions
 
 Prerequisites: Windows machine with Docker, docker-compose and .NET Core 2.0 installed.
-On Ubuntu I got some runtime error :-(
+On Ubuntu/Mac I got some runtime error:
+
+```
+$ curl http://localhost:50118/api/gost_instance
+System.ComponentModel.Win32Exception (0x80004005): No such file or directory
+   at System.Diagnostics.Process.ResolvePath(String filename)
+   at System.Diagnostics.Process.StartCore(ProcessStartInfo startInfo)
+   at System.Diagnostics.Process.Start()
+   at Ductus.FluentDocker.Executors.ProcessExecutor`2.Execute()
+   at Ductus.FluentDocker.Commands.Machine.Ls()
+   at Ductus.FluentDocker.Services.Hosts.Discover()
+```
 
 Testcases:
 
