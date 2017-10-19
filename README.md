@@ -88,7 +88,7 @@ b11a329e4aef        geodan/gost-db         "docker-entrypoint.sh"   About a minu
 
 Step 6: Delete GOST project
 
-- Enter a name for new GOST project (for example: test)
+- Enter a name for existing GOST project (for example: test)
 
 - Press 'Delete project' button
 
