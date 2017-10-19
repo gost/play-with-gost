@@ -3,9 +3,9 @@
 This document describes the commands used to start multiple GOST projects. 
 In this example we're starting 2 projects on a local machine: 
 
-1. gost_prod on port 8080, external uri: http://gost_prod.lvh.me
+1. gost_prod, external uri: http://gost_prod.lvh.me
 
-2. gost_test on port 8081, external uri: http://gost_test.lvh.me
+2. gost_test, external uri: http://gost_test.lvh.me
 
 The site lvh.me is a handy site to test the subdomains: it redirects to localhost machine.
 
@@ -29,10 +29,9 @@ $ docker network create gost-network
 $ docker network connect gost-network nginx-proxy
 ```
 
-- Set environment variables PORT and VIRTUAL_HOST
+- Set environment variable VIRTUAL_HOST
 
 ```
-$ export PORT=8080
 $ export VIRTUAL_HOST=gost_prod.lvh.me
 ```
 
@@ -46,10 +45,9 @@ $ docker-compose -p gost_prod up -d
 
 Go to http://gost_prod.lvh.me and the GOST dashboard should be visible.
 
-- Start another project (gost_test.lvh.me, 8081)
+- Start another project (gost_test.lvh.me)
 
 ```
-$ export PORT=8081
 $ export VIRTUAL_HOST=gost_test.lvh.me
 $ docker-compose -p gost_test up -d
 ```
