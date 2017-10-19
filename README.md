@@ -58,7 +58,7 @@ Now listening on: http://localhost:50118
 Application started. Press Ctrl+C to shut down.
 ```
 
-Now open http://localhost:50118
+Now open http://localhost:50118/index.html
 
 Step 5: Create new GOST project
 
