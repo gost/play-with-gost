@@ -4,6 +4,7 @@ using Ductus.FluentDocker.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace pwg.core
 {
@@ -16,6 +17,30 @@ namespace pwg.core
             var hosts = new Hosts().Discover();
             _docker = hosts.FirstOrDefault(x => x.IsNative) ?? hosts.FirstOrDefault(x => x.Name == "default");
         }
+
+        /**private static async Task<DateTime> CountToAsync(int num = 10)
+        {
+            await Task.Run(() => ...);
+            return DateTime.Now;
+        }*/
+
+        public async Task StartAsync(string ProjectName, string Tld)
+        {
+            CommandResponse<IList<String>> res;
+            await Task.Run(() =>
+            {
+                Environment.SetEnvironmentVariable("VIRTUAL_HOST", ProjectName + "." + Tld);
+
+                var file = "docker-compose.yml";
+                var services = new string[1] { "-d" };
+                var ver = _docker.Host.ComposeVersion().Data[0];
+
+                res = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName, services: services);
+                return res;
+            }
+            );
+        }
+
 
         public CommandResponse<IList<String>> Start(string ProjectName, string Tld)
         {

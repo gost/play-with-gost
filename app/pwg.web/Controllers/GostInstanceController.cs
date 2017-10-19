@@ -16,10 +16,10 @@ namespace pwg.web.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody]PostObject postObject)
+        public async void Post([FromBody]PostObject postObject)
         {
             var g = new GostRepository();
-            g.Start(postObject.Name, postObject.Tld);
+            await g.StartAsync(postObject.Name, postObject.Tld);
         }
 
         [HttpDelete]
