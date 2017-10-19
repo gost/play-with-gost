@@ -46,7 +46,7 @@ $ docker network connect gost-network nginx-proxy
 
 Step 4: Run pwg application
 
-``
+```
 $ git clone https://github.com/gost/play-with-gost.git
 $ cd play-with-gost/app/pwg.web
 $ dotnet restore
