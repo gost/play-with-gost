@@ -10,7 +10,7 @@ namespace pwg.web.Controllers
         [HttpPost]
         public bool Get(string ProjectName)
         {
-            var g = new Gost();
+            var g = new GostRepository();
             g.Start(ProjectName, "gost_prod.lvh.me", 8080);
             return true;
         }
