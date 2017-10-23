@@ -43,19 +43,7 @@ Step 1: Start proxy
 $ docker run -d -p 80:80 --name nginx-proxy -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
 ```
 
-Step 2: Create GOST network
-
-```
-$ docker network create gost-network
-```
-
-Step 3: Join nginx proxy and gost-network
-
-```
-$ docker network connect gost-network nginx-proxy
-```
-
-Step 4: Run pwg application
+Step 2: Run Play-With-GOST application
 
 ```
 $ git clone https://github.com/gost/play-with-gost.git
@@ -95,7 +83,7 @@ b11a329e4aef        geodan/gost-db         "docker-entrypoint.sh"   About a minu
 
 - Check with website container creation: press 'Show projects' button, should show 1 new project 'test'
 
-- When started, go to your new GOST instance: http://test.lvh.me (in case of test as projectname)
+- When started, go to your new GOST instance: http://test.lvh.me (in case of 'test' as projectname)
 
 Step 6: Delete GOST project
 
@@ -115,7 +103,7 @@ CONTAINER ID        IMAGE                 COMMAND                  CREATED      
 31a5665570c6        jwilder/nginx-proxy   "/app/docker-entrypoi"   20 minutes ago      Up 20 minutes       0.0.0.0:80->80/tcp   nginx-proxy
 ```
 
-- Check with website container deletion: press 'Show projects' button, shopuld now show '[]'
+- Check with website container deletion: press 'Show projects' button, should now show '[]'
 
 
 ## Web API
