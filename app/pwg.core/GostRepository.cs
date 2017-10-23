@@ -65,13 +65,13 @@ namespace pwg.core
 
         public CommandResponse<IList<String>> DisconnectNetwork(string ContainerId, string NetWorkId)
         {
-            var response = _docker.Host.NetworkConnect(ContainerId, NetWorkId);
+            var response = _docker.Host.NetworkDisconnect(ContainerId, NetWorkId);
             return response;
         }
 
         public CommandResponse<IList<String>> ConnectNetwork(string ContainerId, string NetWorkId)
         {
-            var response = _docker.Host.NetworkDisconnect(ContainerId, NetWorkId);
+            var response = _docker.Host.NetworkConnect(ContainerId, NetWorkId);
             return response;
         }
 

@@ -11,7 +11,7 @@ namespace pwg.console
             Console.WriteLine("Starting GOST");
 
             var tld = "lvh.me";
-            var projectname = "bert12";
+            var projectname = "bert4";
             StartGostInstance(g, projectname, tld);
             // StopGostInstance(g, projectname, tld);
             var projects = g.GetProjects();

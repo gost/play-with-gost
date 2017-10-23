@@ -1,4 +1,4 @@
-export GOST_NAME=bert1
+export GOST_NAME=bert2
 export GOST_TLD=lvh.me
 export VIRTUAL_HOST=$GOST_NAME.$GOST_TLD
 docker network create $VIRTUAL_HOST
