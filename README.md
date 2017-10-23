@@ -61,7 +61,7 @@ Now open http://localhost:50118/index.html
 
 <img src="pwg.png"/>
 
-Step 5: Create new GOST project
+Step 3: Create new GOST project
 
 - Enter a name for new GOST project (for example: test)
 
@@ -85,7 +85,7 @@ b11a329e4aef        geodan/gost-db         "docker-entrypoint.sh"   About a minu
 
 - When started, go to your new GOST instance: http://test.lvh.me (in case of 'test' as projectname)
 
-Step 6: Delete GOST project
+Step 4: Delete GOST project
 
 - Enter a name for existing GOST project (for example: test)
 
