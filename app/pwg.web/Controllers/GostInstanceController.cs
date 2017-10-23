@@ -23,10 +23,10 @@ namespace pwg.web.Controllers
         }
 
         [HttpDelete]
-        public void Delete(string name)
+        public void Delete(string name, string Tld)
         {
             var g = new GostRepository();
-            g.Stop(name);
+            g.Stop(name, Tld);
         }
     }
 

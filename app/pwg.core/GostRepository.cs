@@ -11,6 +11,7 @@ namespace pwg.core
     public class GostRepository
     {
         private IHostService _docker;
+        private string nginxproxyid;
 
         public GostRepository()
         {
@@ -18,39 +19,84 @@ namespace pwg.core
             _docker = hosts.FirstOrDefault(x => x.IsNative) ?? hosts.FirstOrDefault(x => x.Name == "default");
         }
 
-        /**private static async Task<DateTime> CountToAsync(int num = 10)
-        {
-            await Task.Run(() => ...);
-            return DateTime.Now;
-        }*/
-
         public async Task StartAsync(string ProjectName, string Tld)
         {
-            CommandResponse<IList<String>> res;
             await Task.Run(() =>
             {
-                Environment.SetEnvironmentVariable("VIRTUAL_HOST", ProjectName + "." + Tld);
-
-                var file = "docker-compose.yml";
-                var services = new string[1] { "-d" };
-                var ver = _docker.Host.ComposeVersion().Data[0];
-
-                res = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName, services: services);
-                return res;
+                return Start(ProjectName, Tld);
             }
             );
         }
 
+        public CommandResponse<IList<String>> CreateNetwork(string Name)
+        {
+            var n = new NetworkCreateParams();
+            var response = _docker.Host.NetworkCreate(Name, null);
+            return response;
+        }
+
+        public CommandResponse<IList<String>> DeleteNetwork(string Id)
+        {
+            var networks = new string[] { Id };
+            var response = _docker.Host.NetworkRm(network: networks);
+            return response;
+        }
+
+        public string GetNetworkIdByName(string Name)
+        {
+            var networks = _docker.Host.NetworkLs();
+            foreach (var n in networks.Data)
+            {
+                if (n.Split("   ")[1] == Name)
+                {
+                    return n.Split("   ")[0];
+                }
+            }
+
+            return null;
+        }
+
+
+        public string GetContainerByName(string Name)
+        {
+            var containers = _docker.GetContainers(filter: $" -f name={Name}");
+            return containers.FirstOrDefault().Id;
+        }
+
+        public CommandResponse<IList<String>> DisconnectNetwork(string ContainerId, string NetWorkId)
+        {
+            var response = _docker.Host.NetworkConnect(ContainerId, NetWorkId);
+            return response;
+        }
+
+        public CommandResponse<IList<String>> ConnectNetwork(string ContainerId, string NetWorkId)
+        {
+            var response = _docker.Host.NetworkDisconnect(ContainerId, NetWorkId);
+            return response;
+        }
+
+        public string GetVersion()
+        {
+            return _docker.Host.ComposeVersion().Data[0];
+        }
 
         public CommandResponse<IList<String>> Start(string ProjectName, string Tld)
         {
-            Environment.SetEnvironmentVariable("VIRTUAL_HOST", ProjectName + "." + Tld);
+            // get the nginx proxy
+            nginxproxyid = GetContainerByName("nginx-proxy");
+
+            // create network for project an connect to nginx proxy
+            var projectid = ProjectName + "." + Tld;
+            var resp = CreateNetwork(projectid);
+            var network_id = resp.Data[0];
+            ConnectNetwork(nginxproxyid, network_id);
+
+            // Start new gost instance in the new network
+            Environment.SetEnvironmentVariable("VIRTUAL_HOST", projectid);
 
             var file = "docker-compose.yml";
-            var services = new string[1]{ "-d"};
-            var ver = _docker.Host.ComposeVersion().Data[0];
-
-            var response = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName,services:services);
+            var services = new string[1] { "-d" };
+            var response = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName, services: services);
             return response;
         }
 
@@ -59,9 +105,10 @@ namespace pwg.core
             var runningContainers = _docker.GetRunningContainers();
             var result = new List<String>();
 
-            foreach(var cnt in runningContainers)
+            foreach (var cnt in runningContainers)
             {
-                if (cnt.Name.Contains("_dashboard_")){
+                if (cnt.Name.Contains("_dashboard_"))
+                {
                     int start = 1;
                     int end = cnt.Name.IndexOf("_dashboard_");
                     var project = cnt.Name.Substring(start, end - start);
@@ -71,9 +118,15 @@ namespace pwg.core
             return result;
         }
 
-        public void Stop(string ProjectName)
+        public void Stop(string ProjectName, string Tld)
         {
-            _docker.Host.ComposeDown(altProjectName: ProjectName);
+            var projectid = ProjectName + "." + Tld;
+
+            var containerid = GetContainerByName(ProjectName + "_dashboard_1");
+            DisconnectNetwork(containerid, nginxproxyid);
+            _docker.Host.ComposeDown(altProjectName: ProjectName, removeVolumes: true, removeOrphanContainers: true);
+            var network = GetNetworkIdByName(projectid);
+            DeleteNetwork(network);
         }
     }
 }

@@ -42,7 +42,7 @@
 
             if (projectName != "") {
                 var xmlhttp = new XMLHttpRequest();
-                xmlhttp.open("DELETE", "/api/gost_instance?name=" + projectName + "&tld=lvh.me", true);
+                xmlhttp.open("DELETE", "/api/gost_instance?name=" + projectName, true);
                 xmlhttp.send();
             }
             else {

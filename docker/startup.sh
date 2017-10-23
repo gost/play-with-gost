@@ -1,22 +1,6 @@
-#!/bin/bash
-echo create GOST-network
-docker network create gost-network
-
-echo run nginx-proxy and join gost-network
-docker run -d -p 80:80 --name nginx-proxy -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
-docker network connect gost-network nginx-proxy
-
-# start production version
-echo start production...
-export VIRTUAL_HOST=bert.lvh.me
-docker-compose -p bert up -d
-
-# start qa version
-echo start qa...
-export VIRTUAL_HOST=bert1.lvh.me
-docker-compose -p paul up -d 
-
-echo end of script
-# to stop a project do: 
-# $ docker-compose -p test down
-# $ docker-compose -p prod down
+export GOST_NAME=bert1
+export GOST_TLD=lvh.me
+export VIRTUAL_HOST=$GOST_NAME.$GOST_TLD
+docker network create $VIRTUAL_HOST
+docker network connect $VIRTUAL_HOST nginx-proxy
+docker-compose -p $GOST_NAME up -d

@@ -16,7 +16,10 @@ services:
             - gost-db
         environment:
             GOST_DB_HOST: gost-db
+            GOST_SERVER_EXTERNAL_URI: ${VIRTUAL_HOST}
     dashboard:
+        depends_on:
+            - gost
         image: bertt/gost-dashboard
         ports:
             - "127.0.0.1::80"
@@ -28,4 +31,4 @@ volumes:
 networks:
   default:
     external:
-      name: gost-network
+      name: ${VIRTUAL_HOST}

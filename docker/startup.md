@@ -17,16 +17,18 @@ Steps:
 $ docker run -d -p 80:80 --name nginx-proxy -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
 ```
 
-- Create GOST network
+1] Create Gost_prod
+
+- Create Docker network for this application
 
 ```
-$ docker network create gost-network
+$ docker network create gost_prod.lvh.me
 ```
 
-- Join nginx proxy and gost-network
+- Join nginx proxy and new gost-network
 
 ```
-$ docker network connect gost-network nginx-proxy
+$ docker network connect gost_prod.lvh.me nginx-proxy
 ```
 
 - Set environment variable VIRTUAL_HOST
@@ -45,10 +47,14 @@ $ docker-compose -p gost_prod up -d
 
 Go to http://gost_prod.lvh.me and the GOST dashboard should be visible.
 
+Insert something (Location) 
+
 - Start another project (gost_test.lvh.me)
 
 ```
 $ export VIRTUAL_HOST=gost_test.lvh.me
+$ docker network create gost_test.lvh.me
+$ docker network connect gost_test.lvh.me nginx-proxy
 $ docker-compose -p gost_test up -d
 ```
 

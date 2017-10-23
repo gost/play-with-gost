@@ -9,10 +9,11 @@ namespace pwg.console
         {
             var g = new GostRepository();
             Console.WriteLine("Starting GOST");
-            var projectname = "haha";
+
             var tld = "lvh.me";
-            // StartGostInstance(g, projectname, tld);
-            // StopGostInstance(g, projectname);
+            var projectname = "bert12";
+            StartGostInstance(g, projectname, tld);
+            // StopGostInstance(g, projectname, tld);
             var projects = g.GetProjects();
             Console.WriteLine("Projects: " + string.Join(",", projects));
             Console.WriteLine("Stopped.. press a key");
@@ -20,9 +21,9 @@ namespace pwg.console
 
         }
 
-        static void StopGostInstance(GostRepository repos, string ProjectName)
+        static void StopGostInstance(GostRepository repos, string ProjectName, string Tld)
         {
-            repos.Stop(ProjectName);
+            repos.Stop(ProjectName, Tld);
         }
 
         static void StartGostInstance(GostRepository repos, string ProjectName, string Tld)
