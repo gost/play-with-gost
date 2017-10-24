@@ -60,7 +60,11 @@ namespace pwg.core
         public string GetContainerByName(string Name)
         {
             var containers = _docker.GetContainers(filter: $" -f name={Name}");
-            return containers.FirstOrDefault().Id;
+            if (containers.Count == 1)
+            {
+                return containers.FirstOrDefault().Id;
+            }
+            return null;
         }
 
         public CommandResponse<IList<String>> DisconnectNetwork(string ContainerId, string NetWorkId)
@@ -85,19 +89,24 @@ namespace pwg.core
             // get the nginx proxy
             nginxproxyid = GetContainerByName("nginx-proxy");
 
-            // create network for project an connect to nginx proxy
-            var projectid = ProjectName + "." + Tld;
-            var resp = CreateNetwork(projectid);
-            var network_id = resp.Data[0];
-            ConnectNetwork(nginxproxyid, network_id);
+            if (nginxproxyid != null)
+            {
+                // create network for project an connect to nginx proxy
+                var projectid = ProjectName + "." + Tld;
+                var resp = CreateNetwork(projectid);
+                var network_id = resp.Data[0];
+                ConnectNetwork(nginxproxyid, network_id);
 
-            // Start new gost instance in the new network
-            Environment.SetEnvironmentVariable("VIRTUAL_HOST", projectid);
+                // Start new gost instance in the new network
+                Environment.SetEnvironmentVariable("VIRTUAL_HOST", projectid);
 
-            var file = "docker-compose.yml";
-            var services = new string[1] { "-d" };
-            var response = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName, services: services);
-            return response;
+                var file = "docker-compose.yml";
+                var services = new string[1] { "-d" };
+                var response = _docker.Host.ComposeUp(composeFile: file, altProjectName: ProjectName, services: services);
+                return response;
+            }
+
+            return null;
         }
 
         public List<String> GetProjects()

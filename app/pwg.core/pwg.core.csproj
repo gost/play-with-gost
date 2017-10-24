@@ -5,13 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ductus.FluentDocker2" Version="1.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="Ductus.FluentDocker2">
-      <HintPath>..\..\..\..\mariotoffia\FluentDocker\Ductus.FluenDocker2\bin\Debug\netcoreapp2.0\Ductus.FluentDocker2.dll</HintPath>
-    </Reference>
+    <PackageReference Include="Ductus.FluentDocker" Version="2.2.3" />
   </ItemGroup>
 
 </Project>

@@ -12,8 +12,8 @@ namespace pwg.console
 
             var tld = "lvh.me";
             var projectname = "bert4";
-            StartGostInstance(g, projectname, tld);
-            // StopGostInstance(g, projectname, tld);
+            // StartGostInstance(g, projectname, tld);
+            StopGostInstance(g, projectname, tld);
             var projects = g.GetProjects();
             Console.WriteLine("Projects: " + string.Join(",", projects));
             Console.WriteLine("Stopped.. press a key");
@@ -29,9 +29,17 @@ namespace pwg.console
         static void StartGostInstance(GostRepository repos, string ProjectName, string Tld)
         {
             var response = repos.Start(ProjectName, Tld);
-            if (!String.IsNullOrEmpty(response.Error))
+
+            if (response != null)
             {
-                Console.WriteLine("Error: " + response.Error);
+                if (!String.IsNullOrEmpty(response.Error))
+                {
+                    Console.WriteLine("Error: " + response.Error);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Could not start GOST instance. Is nginxproxy started?");
             }
         }
     }
