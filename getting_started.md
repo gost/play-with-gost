@@ -31,12 +31,12 @@ Step 4: Run pwg application
 
 ```
 $ git clone https://github.com/gost/play-with-gost.git
-$ cd play-with-gost/app/pwg.web
+$ cd play-with-gost/app/pwg.web1.1
 $ dotnet restore
 $ dotnet run
-Using launch settings from D:\dev\github.com\gost\play-with-gost\app\pwg.web\Properties\launchSettings.json...
+Using launch settings from D:\dev\github.com\gost\play-with-gost\app\pwg.web1.1\Properties\launchSettings.json...
 Hosting environment: Development
-Content root path: D:\dev\github.com\gost\play-with-gost\app\pwg.web
+Content root path: D:\dev\github.com\gost\play-with-gost\app\pwg.web1.1
 Now listening on: http://localhost:50118
 Application started. Press Ctrl+C to shut down.
 ```
