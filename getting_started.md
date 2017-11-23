@@ -15,19 +15,7 @@ Step 1: Start proxy
 $ docker run -d -p 80:80 --name nginx-proxy -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
 ```
 
-Step 2: Create GOST network
-
-```
-$ docker network create gost-network
-```
-
-Step 3: Join nginx proxy and gost-network
-
-```
-$ docker network connect gost-network nginx-proxy
-```
-
-Step 4: Run pwg application
+Step 2: Run pwg application
 
 ```
 $ git clone https://github.com/gost/play-with-gost.git
@@ -41,11 +29,11 @@ Now listening on: http://localhost:50118
 Application started. Press Ctrl+C to shut down.
 ```
 
-Now open http://localhost:50118/index.html
+Step 3: open http://localhost:50118/index.html
 
 <img src="pwg.png"/>
 
-Step 5: Create new GOST project
+Step 4: Create new GOST project
 
 - Enter a name for new GOST project (for example: test)
 
@@ -69,7 +57,7 @@ b11a329e4aef        geodan/gost-db         "docker-entrypoint.sh"   About a minu
 
 - When started, go to your new GOST instance: http://test.lvh.me (in case of test as projectname)
 
-Step 6: Delete GOST project
+Step 5: Delete GOST project
 
 - Enter a name for existing GOST project (for example: test)
 
