@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:50117/",
+      "applicationUrl": "http://localhost:56577/",
       "sslPort": 0
     }
   },
@@ -16,14 +16,14 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "pwg.web": {
+    "pwg.web1._1": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:50118/"
+      "applicationUrl": "http://localhost:56578/"
     }
   }
 }

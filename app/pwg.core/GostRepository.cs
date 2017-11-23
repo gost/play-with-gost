@@ -47,9 +47,10 @@ namespace pwg.core
             var networks = _docker.Host.NetworkLs();
             foreach (var n in networks.Data)
             {
-                if (n.Split("   ")[1] == Name)
+                var sp = n.Split(new string[] { "   " }, StringSplitOptions.None);
+                if (sp[1] == Name)
                 {
-                    return n.Split("   ")[0];
+                    return sp[0];
                 }
             }
 
