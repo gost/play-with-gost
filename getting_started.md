@@ -1,7 +1,11 @@
 # Getting started with play-with-gost
 
 
-Prerequisites: Install .NET Core 1.1.2 (https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.5-download.md)
+Prerequisites: 
+
+- Install .NET Core 1.1.2 (https://github.com/dotnet/core/blob/master/release-notes/download-archives/1.0.5-download.md)
+
+- Install Docker
 
 ```
 $ docker --version
